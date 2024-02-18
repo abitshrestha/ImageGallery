@@ -40,7 +40,7 @@ const Navbar = ({showSearchBar}) => {
                     headers.Authorization = `Bearer ${parsedToken.token}`;
                 }
 
-                const response = await axios.get(`http://localhost:8000/user-auth`, { headers });
+                const response = await axios.get(`https://imagegallery-backend.onrender.com/user-auth`, { headers });
                 if (response.data.message === "rquires JWT") {
                     setLogin(false);
                 } else if (response.data.message === 'jwt expired') {

@@ -62,7 +62,7 @@ const Upload = () => {
             const formData = new FormData();
             formData.append('image', image);
             formData.append('tags',tags);
-            const response = await axios.post(`http://localhost:8000/uploads`, formData, { headers });
+            const response = await axios.post(`https://imagegallery-backend.onrender.com/uploads`, formData, { headers });
             console.log(response)
         } catch (error) {
             console.log(error);
@@ -84,7 +84,7 @@ const Upload = () => {
                     headers.Authorization = `Bearer ${parsedToken.token}`;
                 }
 
-                const response = await axios.get(`http://localhost:8000/user-auth`, { headers });
+                const response = await axios.get(`https://imagegallery-backend.onrender.com/user-auth`, { headers });
                 console.log(response);
                 if (response.data.message === "rquires JWT") {
                     window.location.href = '/login';

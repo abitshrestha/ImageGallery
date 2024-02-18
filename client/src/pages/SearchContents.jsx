@@ -19,7 +19,7 @@ const SearchContents = () => {
     useEffect(() => {
         async function getImages() {
             try {
-                const response = await axios.get(`http://localhost:8000/search/${query}`);
+                const response = await axios.get(`https://imagegallery-backend.onrender.com/search/${query}`);
                 // console.log(response);
                 const images = response.data;
                 setImagesData(images);
@@ -33,7 +33,7 @@ const SearchContents = () => {
     useEffect(() => {
         async function getProfile() {
             try {
-                const response = await axios.get(`http://localhost:8000/authors`);
+                const response = await axios.get(`https://imagegallery-backend.onrender.com/authors`);
                 // console.log(response);
                 setAuthors(response.data.users);
             } catch (error) {
@@ -45,7 +45,7 @@ const SearchContents = () => {
 
     const downloadImage = async (imageName) => {
         try {
-            const response = await axios.get(`http://localhost:8000/download/${imageName}`, {
+            const response = await axios.get(`https://imagegallery-backend.onrender.com/download/${imageName}`, {
                 responseType: 'blob'
             });
             FileDownload(response.data, imageName);
@@ -67,7 +67,7 @@ const SearchContents = () => {
                 <div className="card-container d-flex ms-4 flex-wrap">
                     {imagesData.map((image, index) => (
                         <div className="card me-4 mb-4" key={index} style={{ width: '28rem' }}>
-                            <img src={`http://localhost:8000/images/${image.imageName}`} className="card-img-top" alt="..." />
+                            <img src={`https://imagegallery-backend.onrender.com/images/${image.imageName}`} className="card-img-top" alt="..." />
                             <div className="card-info">
                                 <div className="infos">
                                     <StyledName className="card-title">{findAuthorName(image.author)}</StyledName>

@@ -12,7 +12,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-             await axios.post(`http://localhost:8000/signup`, {
+             await axios.post(`https://imagegallery-backend.onrender.com/signup`, {
                 username,
                 email,
                 password

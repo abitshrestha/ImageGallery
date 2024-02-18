@@ -18,7 +18,7 @@ const ProfilePage = () => {
     const selectedImage = event.target.files[0];
     const imageUrl = URL.createObjectURL(selectedImage);
     try {
-      const response=await axios.put(`http://localhost:8000/user`);
+      const response=await axios.put(`https://imagegallery-backend.onrender.com/user`);
       console.log(response);
     } catch (error) {
       console.log(error);
