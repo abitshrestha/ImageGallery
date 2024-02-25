@@ -9,17 +9,21 @@ const StyledName = styled.h5`
 `;
 
 const Images = () => {
+  const [loading, setLoading] = useState(true);
   const [imagesData, setImagesData] = useState([]);
   const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
     async function getImages() {
       try {
+        setLoading(true);
         const response = await axios.get(`https://imagegallery-backend.onrender.com/test`);
         const images = response.data.images;
         setImagesData(images);
+        setLoading(false);
       } catch (error) {
         console.log(error.message);
+        setLoading(false);
       }
     }
     getImages();
@@ -57,20 +61,25 @@ const Images = () => {
   return (
     <div className="imageSection">
       <p className="ms-4 fs-3">Free Stock Photos </p>
-      <div className="card-container d-flex ms-4 flex-wrap">
-        {imagesData.map((image, index) => (
-          <div className="card me-4 mb-4" key={index} style={{ width: '28rem' }}>
-            <img src={`https://imagegallery-backend.onrender.com/images/${image.imageName}`} className="card-img-top" alt="..." />
-            <div className="card-info">
-              <div className="infos">
-                <StyledName className="card-title">{findAuthorName(image.author)}</StyledName>
-                <button className="btn downloadBtn btn-success" onClick={() => downloadImage(image.imageName)}>Download</button>
+      {loading ? ( // Display spinner if loading is true
+        <div className="spinner-container">
+          <CircularProgress />
+        </div>
+      ) : (
+        <div className="card-container d-flex ms-4 flex-wrap">
+          {imagesData.map((image, index) => (
+            <div className="card me-4 mb-4" key={index} style={{ width: '28rem' }}>
+              <img src={`https://imagegallery-backend.onrender.com/images/${image.imageName}`} className="card-img-top" alt="..." />
+              <div className="card-info">
+                <div className="infos">
+                  <StyledName className="card-title">{findAuthorName(image.author)}</StyledName>
+                  <button className="btn downloadBtn btn-success" onClick={() => downloadImage(image.imageName)}>Download</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-
+          ))}
+        </div>
+      )}
     </div>
   )
 }
