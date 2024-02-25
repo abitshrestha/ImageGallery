@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios";
 import FileDownload from 'js-file-download';
 import styled from 'styled-components';
+import Spinner from "../components/Spinner";
 
 const StyledName = styled.h5`
   color:white;
@@ -63,7 +64,7 @@ const Images = () => {
       <p className="ms-4 fs-3">Free Stock Photos </p>
       {loading ? ( // Display spinner if loading is true
         <div className="spinner-container">
-          <CircularProgress />
+          <Spinner />
         </div>
       ) : (
         <div className="card-container d-flex ms-4 flex-wrap">
