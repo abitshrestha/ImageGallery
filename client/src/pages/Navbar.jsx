@@ -28,7 +28,7 @@ const Navbar = ({showSearchBar}) => {
 
     const handleLogout = () => {
         localStorage.removeItem('auth');
-        window.location.href = '/';
+        navigate('/');
     }
     useEffect(() => {
         async function validateUser() {

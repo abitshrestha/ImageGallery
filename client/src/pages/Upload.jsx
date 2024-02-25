@@ -2,6 +2,7 @@ import axios from "axios";
 import Navbar from "./Navbar"
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const StyledNavbar = styled.nav`
 `;
@@ -46,7 +47,10 @@ const SubmitButton = styled.button`
     }
 `;
 
+
 const Upload = () => {
+      const navigate = useNavigate();
+
     const [image, setImage] = useState('');
     const [tags,setTags]=useState('');
     const [imagePreview, setImagePreview] = useState('');
@@ -87,19 +91,19 @@ const Upload = () => {
                 const response = await axios.get(`https://imagegallery-backend.onrender.com/user-auth`, { headers });
                 console.log(response);
                 if (response.data.message === "rquires JWT") {
-                    window.location.href = '/login';
+                    navigate('/login');
                 } else if (response.data.message === 'jwt expired') {
-                    window.location.href = '/login';
+                    navigate('/login');
                 }
                 else if (response.data.message === 'invalid token') {
-                    window.location.href = '/login';
+                    navigate('/login');
                 }else if(response.data.message==='invalid signature'){
-                    window.location.href = '/login';
+                    navigate('/login');
                 }else if(response.data.message==='internal error'){
-                    window.location.href = '/login';
+                    navigate('/login');
                 }
                 else {
-                    console.log('fsd');
+                    console.log('successful');
                 }
             } catch (error) {
                 console.log(error);

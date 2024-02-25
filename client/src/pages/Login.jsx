@@ -2,11 +2,13 @@ import { useState } from "react";
 import axios from 'axios';
 import { NavLink } from "react-router-dom";
 import Navbar from "./Navbar";
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate=useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,7 +18,7 @@ const Login = () => {
                 password
             });
             localStorage.setItem('auth', JSON.stringify(response.data));
-            window.location.href = '/';
+            navigate('/');
         } catch (error) {
             setError("Invalid email or password. Please try again.");
         }

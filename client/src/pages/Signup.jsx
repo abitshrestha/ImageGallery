@@ -2,12 +2,15 @@ import { useState } from "react";
 import axios from 'axios';
 import Navbar from "./Navbar";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const Signup = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,7 +20,7 @@ const Signup = () => {
                 email,
                 password
             });
-            window.location.href='/login';
+            const navigate = useNavigate();
             // console.log(response);
         } catch (error) {
             setError("An error occurred. Please try again.");
